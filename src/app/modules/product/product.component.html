@@ -16,7 +16,6 @@
 	</div>
 </div>
 
-
 <section class="item-details section">
 	<div class="container">
 		<div class="top-area">
@@ -25,34 +24,39 @@
 					<div class="product-images">
 						<main id="gallery">
 							<div class="main-img">
-								<img src="assets/images/product-details/01.jpg" id="current" alt="#">
+								<img src="{{ singleImage(product?.images) }}" id="current" alt="#">
 							</div>
 							<div class="images">
-								<img src="assets/images/product-details/01.jpg" class="img" alt="#"
-									(click)="changeImage($event)">
-								<img src="assets/images/product-details/02.jpg" class="img" alt="#"
-									(click)="changeImage($event)">
-								<img src="assets/images/product-details/03.jpg" class="img" alt="#"
-									(click)="changeImage($event)">
-								<img src="assets/images/product-details/04.jpg" class="img" alt="#"
-									(click)="changeImage($event)">
-								<img src="assets/images/product-details/05.jpg" class="img" alt="#"
-									(click)="changeImage($event)">
+								<ng-container *ngFor="let image of product?.images">
+									<img src="{{ image.url }}" class="img" alt="{{ image.name }}"
+										(click)="changeImage($event)">
+								</ng-container>
 							</div>
 						</main>
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-12 col-12">
 					<div class="product-info">
-						<h2 class="title">GoPro Karma Camera Drone</h2>
-						<p class="category"><i class="lni lni-tag"></i> Drones:<a href="javascript:void(0)">Action
-								cameras</a></p>
-						<h3 class="price">$850<span>$945</span></h3>
-						<p class="info-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-							tempor incididunt
-							ut labore et dolore magna aliqua.</p>
+						<h2 class="title">{{ product?.name }}}</h2>
+						<p class="category"><i class="lni lni-tag"></i> Category:<a href="javascript:void(0)">{{
+								product?.category?.name }}</a></p>
+						<p class="category"><i class="lni lni-tag"></i> Brand:<a href="javascript:void(0)">{{
+								product?.brand?.name }}</a></p>
+
+						<ng-template *ngIf="product?.discount === 0 else discountYes">
+							<h3 class="price">
+								<span>{{ product?.price }}đ</span>
+							</h3>
+						</ng-template>
+						<ng-template #discountYes>
+							<h3 class="price">
+								{{ discountTotal(product?.price, product?.discount) }}đ
+								<span>{{ product?.price }}đ</span>
+							</h3>
+						</ng-template>
+
 						<div class="row">
-							<div class="col-lg-4 col-md-4 col-12">
+							<!-- <div class="col-lg-4 col-md-4 col-12">
 								<div class="form-group color-option">
 									<label class="title-label" for="size">Choose color</label>
 									<div class="single-checkbox checkbox-style-1">
@@ -72,8 +76,8 @@
 										<label for="checkbox-4"><span></span></label>
 									</div>
 								</div>
-							</div>
-							<div class="col-lg-4 col-md-4 col-12">
+							</div> -->
+							<!-- <div class="col-lg-4 col-md-4 col-12">
 								<div class="form-group">
 									<label for="color">Battery capacity</label>
 									<select class="form-control" id="color">
@@ -82,7 +86,7 @@
 										<option>8000 mAh</option>
 									</select>
 								</div>
-							</div>
+							</div> -->
 							<div class="col-lg-4 col-md-4 col-12">
 								<div class="form-group quantity">
 									<label for="color">Quantity</label>
@@ -103,11 +107,11 @@
 										<button class="btn" style="width: 100%;">Add to Cart</button>
 									</div>
 								</div>
-								<div class="col-lg-4 col-md-4 col-12">
+								<!-- <div class="col-lg-4 col-md-4 col-12">
 									<div class="wish-button">
 										<button class="btn"><i class="lni lni-reload"></i> Compare</button>
 									</div>
-								</div>
+								</div> -->
 								<div class="col-lg-4 col-md-4 col-12">
 									<div class="wish-button">
 										<button class="btn"><i class="lni lni-heart"></i> To Wishlist</button>
@@ -125,23 +129,12 @@
 					<div class="col-lg-6 col-12">
 						<div class="info-body custom-responsive-margin">
 							<h4>Details</h4>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-								incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-								exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-								irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.</p>
-							<h4>Features</h4>
-							<ul class="features">
-								<li>Capture 4K30 Video and 12MP Photos</li>
-								<li>Game-Style Controller with Touchscreen</li>
-								<li>View Live Camera Feed</li>
-								<li>Full Control of HERO6 Black</li>
-								<li>Use App for Dedicated Camera Operation</li>
-							</ul>
+							<p>{{ product?.details }}</p>
 						</div>
 					</div>
 					<div class="col-lg-6 col-12">
 						<div class="info-body">
-							<h4>Specifications</h4>
+							<!-- <h4>Specifications</h4>
 							<ul class="normal-list">
 								<li><span>Weight:</span> 35.5oz (1006g)</li>
 								<li><span>Maximum Speed:</span> 35 mph (15 m/s)</li>
@@ -155,7 +148,7 @@
 								<li><span>Local Shipping:</span> up to one week, $10.00</li>
 								<li><span>UPS Ground Shipping:</span> 4 - 6 days, $18.00</li>
 								<li><span>Unishop Global Export:</span> 3 - 4 days, $25.00</li>
-							</ul>
+							</ul> -->
 						</div>
 					</div>
 				</div>

@@ -17,6 +17,8 @@ import { AuthGuard } from './shared/guards/auth.guard';
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 import { HeaderComponent } from './shared/layouts/header/header.component';
 import { FooterComponent } from './shared/layouts/footer/footer.component';
+import { ProductService } from './shared/services/product.service';
+import { CategoryService } from './shared/services/category.service';
 
 @NgModule({
 	declarations: [AppComponent, HeaderComponent, FooterComponent],
@@ -35,6 +37,8 @@ import { FooterComponent } from './shared/layouts/footer/footer.component';
 	providers: [
 		AuthService,
 		CookieService,
+		ProductService,
+		CategoryService,
 		AuthGuard,
 		{
 			provide: HTTP_INTERCEPTORS,
