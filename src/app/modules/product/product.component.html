@@ -19,12 +19,13 @@
 <section class="item-details section">
 	<div class="container">
 		<div class="top-area">
-			<div class="row align-items-center">
-				<div class="col-lg-6 col-md-12 col-12">
+			<div class="row">
+				<div class="col-lg-5 col-md-12 col-12">
 					<div class="product-images">
 						<main id="gallery">
 							<div class="main-img">
-								<img src="{{ singleImage(product?.images) }}" id="current" alt="#">
+								<img src="{{ singleImage(product?.images) }}" id="current" alt="#"
+									style="width: 450px; height: 450px;">
 							</div>
 							<div class="images">
 								<ng-container *ngFor="let image of product?.images">
@@ -35,14 +36,14 @@
 						</main>
 					</div>
 				</div>
-				<div class="col-lg-6 col-md-12 col-12">
+				<div class="col-lg-7 col-md-12 col-12">
 					<div class="product-info">
-						<h2 class="title">{{ product?.name }}}</h2>
-						<p class="category"><i class="lni lni-tag"></i> Category:<a href="javascript:void(0)">{{
+						<h2 class="title">{{ product?.name }}</h2>
+						<p class="category mb-0"><i class=" lni lni-tag"></i> Category:<a
+								[routerLink]="['/category', product?.category?.slug]">{{
 								product?.category?.name }}</a></p>
 						<p class="category"><i class="lni lni-tag"></i> Brand:<a href="javascript:void(0)">{{
 								product?.brand?.name }}</a></p>
-
 						<ng-template *ngIf="product?.discount === 0 else discountYes">
 							<h3 class="price">
 								<span>{{ product?.price }}đ</span>
@@ -54,7 +55,6 @@
 								<span>{{ product?.price }}đ</span>
 							</h3>
 						</ng-template>
-
 						<div class="row">
 							<!-- <div class="col-lg-4 col-md-4 col-12">
 								<div class="form-group color-option">

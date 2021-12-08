@@ -71,17 +71,16 @@
 							<a class="lost-pass" href="account-password-recovery.html">Forgot password?</a>
 						</div>
 						<div class="button">
-							<button [disabled]="isLoading" type="submit" class="btn"
-								[ngClass]="isLoading ? 'test' : ''">
+							<button [disabled]="isLoading" type="submit" class="btn">
 								<ng-container *ngIf="!isLoading else loading">
 									Signin
 								</ng-container>
 								<ng-template #loading>
-									Signing
+									Signing...
 								</ng-template>
 							</button>
 						</div>
-						<p class="outer-link">Don't have an account? <a href="register.html">Register here </a>
+						<p class="outer-link">Don't have an account? <a [routerLink]="['/signup']">Register here </a>
 						</p>
 					</div>
 				</form>

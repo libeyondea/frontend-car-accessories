@@ -16,7 +16,6 @@
 	</div>
 </div>
 
-
 <div class="account-login section">
 	<div class="container">
 		<div class="row">
@@ -26,47 +25,159 @@
 						<h3>No Account? Register</h3>
 						<p>Registration takes less than a minute but gives you full control over your orders.</p>
 					</div>
-					<form class="row" method="post">
+					<form class="row" (ngSubmit)="onSubmit()" #signupForm="ngForm">
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label for="reg-fn">First Name</label>
-								<input class="form-control" type="text" id="reg-fn" required>
+								<label for="first_name">First Name</label>
+								<input class="form-control" type="text" id="first_name" name="first_name"
+									#first_name="ngModel" [(ngModel)]="signupUser.first_name" required>
+								<ng-container *ngIf="first_name.invalid && (first_name.dirty || first_name.touched)">
+									<div *ngIf="first_name.errors?.['required']" class="invalid-feedback d-block">
+										First name is required.
+									</div>
+								</ng-container>
+								<ng-container *ngIf="errMsg.first_name">
+									<div class="invalid-feedback d-block">
+										{{ errMsg.first_name }}
+									</div>
+								</ng-container>
 							</div>
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label for="reg-ln">Last Name</label>
-								<input class="form-control" type="text" id="reg-ln" required>
+								<label for="last_name">Last Name</label>
+								<input class="form-control" type="text" id="last_name" name="last_name"
+									#last_name="ngModel" [(ngModel)]="signupUser.last_name" required>
+								<ng-container *ngIf="last_name.invalid && (last_name.dirty || last_name.touched)">
+									<div *ngIf="last_name.errors?.['required']" class="invalid-feedback d-block">
+										Last name is required.
+									</div>
+								</ng-container>
+								<ng-container *ngIf="errMsg.last_name">
+									<div class="invalid-feedback d-block">
+										{{ errMsg.last_name }}
+									</div>
+								</ng-container>
 							</div>
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label for="reg-email">E-mail Address</label>
-								<input class="form-control" type="email" id="reg-email" required>
+								<label for="email">Email</label>
+								<input class="form-control" type="text" id="email" name="email" #email="ngModel"
+									[(ngModel)]="signupUser.email" required>
+								<ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
+									<div *ngIf="email.errors?.['required']" class="invalid-feedback d-block">
+										Email is required.
+									</div>
+								</ng-container>
+								<ng-container *ngIf="errMsg.email">
+									<div class="invalid-feedback d-block">
+										{{ errMsg.email }}
+									</div>
+								</ng-container>
 							</div>
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label for="reg-phone">Phone Number</label>
-								<input class="form-control" type="text" id="reg-phone" required>
+								<label for="user_name">User name</label>
+								<input class="form-control" type="text" id="user_name" name="user_name"
+									#user_name="ngModel" [(ngModel)]="signupUser.user_name" required>
+								<ng-container *ngIf="user_name.invalid && (user_name.dirty || user_name.touched)">
+									<div *ngIf="user_name.errors?.['required']" class="invalid-feedback d-block">
+										User name is required.
+									</div>
+								</ng-container>
+								<ng-container *ngIf="errMsg.user_name">
+									<div class="invalid-feedback d-block">
+										{{ errMsg.user_name }}
+									</div>
+								</ng-container>
 							</div>
 						</div>
+
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label for="reg-pass">Password</label>
-								<input class="form-control" type="password" id="reg-pass" required>
+								<label for="password">Password</label>
+								<input class="form-control" type="password" id="password" name="password"
+									#password="ngModel" [(ngModel)]="signupUser.password" required>
+								<ng-container *ngIf="password.invalid && (password.dirty || password.touched)">
+									<div *ngIf="password.errors?.['required']" class="invalid-feedback d-block">
+										Password is required.
+									</div>
+								</ng-container>
+								<ng-container *ngIf="errMsg.password">
+									<div class="invalid-feedback d-block">
+										{{ errMsg.password }}
+									</div>
+								</ng-container>
 							</div>
 						</div>
+
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label for="reg-pass-confirm">Confirm Password</label>
-								<input class="form-control" type="password" id="reg-pass-confirm" required>
+								<label for="phone_number">Phone number</label>
+								<input class="form-control" type="text" id="phone_number" name="phone_number"
+									#phone_number="ngModel" [(ngModel)]="signupUser.phone_number" required>
+								<ng-container
+									*ngIf="phone_number.invalid && (phone_number.dirty || phone_number.touched)">
+									<div *ngIf="phone_number.errors?.['required']" class="invalid-feedback d-block">
+										Phone number is required.
+									</div>
+								</ng-container>
+								<ng-container *ngIf="errMsg.phone_number">
+									<div class="invalid-feedback d-block">
+										{{ errMsg.phone_number }}
+									</div>
+								</ng-container>
 							</div>
 						</div>
+
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label for="address">Address</label>
+								<input class="form-control" type="text" id="address" name="address" #address="ngModel"
+									[(ngModel)]="signupUser.address" required>
+								<ng-container *ngIf="address.invalid && (address.dirty || address.touched)">
+									<div *ngIf="address.errors?.['required']" class="invalid-feedback d-block">
+										Address is required.
+									</div>
+								</ng-container>
+								<ng-container *ngIf="errMsg.address">
+									<div class="invalid-feedback d-block">
+										{{ errMsg.address }}
+									</div>
+								</ng-container>
+							</div>
+						</div>
+
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label for="reg-pass">Gender</label>
+								<select class="form-select" name="gender" #gender="ngModel" id="gender"
+									[(ngModel)]="signupUser.gender"
+									style="padding: 0 18px; height: 46px; font-size: 14px;">
+									<option *ngFor="let item of listGender" [ngValue]="item">{{item | titlecase}}
+									</option>
+								</select>
+								<ng-container *ngIf="errMsg.gender">
+									<div class="invalid-feedback d-block">
+										{{ errMsg.gender }}
+									</div>
+								</ng-container>
+							</div>
+						</div>
+
 						<div class="button">
-							<button class="btn" type="submit">Register</button>
+							<button [disabled]="isLoading" type="submit" class="btn">
+								<ng-container *ngIf="!isLoading else loading">
+									Signup
+								</ng-container>
+								<ng-template #loading>
+									Signuping...
+								</ng-template>
+							</button>
 						</div>
-						<p class="outer-link">Already have an account? <a href="login.html">Login Now</a>
+						<p class="outer-link">Already have an account? <a [routerLink]="['/signin']">Signin Now</a>
 						</p>
 					</form>
 				</div>
