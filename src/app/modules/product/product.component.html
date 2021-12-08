@@ -44,15 +44,15 @@
 								product?.category?.name }}</a></p>
 						<p class="category"><i class="lni lni-tag"></i> Brand:<a href="javascript:void(0)">{{
 								product?.brand?.name }}</a></p>
-						<ng-template *ngIf="product?.discount === 0 else discountYes">
+						<ng-container *ngIf="product?.discount === 0 else discountYes">
 							<h3 class="price">
-								<span>{{ product?.price }}đ</span>
+								{{ product?.price | currency:'VND': 'symbol' }}
 							</h3>
-						</ng-template>
+						</ng-container>
 						<ng-template #discountYes>
 							<h3 class="price">
-								{{ discountTotal(product?.price, product?.discount) }}đ
-								<span>{{ product?.price }}đ</span>
+								{{ discountTotal(product?.price, product?.discount) | currency:'VND': 'symbol' }}đ
+								<span>{{ product?.price | currency:'VND': 'symbol' }}</span>
 							</h3>
 						</ng-template>
 						<div class="row">
@@ -90,12 +90,8 @@
 							<div class="col-lg-4 col-md-4 col-12">
 								<div class="form-group quantity">
 									<label for="color">Quantity</label>
-									<select class="form-control">
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
+									<select class="form-control" (change)="onChangeQuantity($event)">
+										<option *ngFor="let item of listQuantity" [value]="item">{{item}}</option>
 									</select>
 								</div>
 							</div>
@@ -104,7 +100,15 @@
 							<div class="row align-items-end">
 								<div class="col-lg-4 col-md-4 col-12">
 									<div class="button cart-button">
-										<button class="btn" style="width: 100%;">Add to Cart</button>
+										<button [disabled]="isLoading" style="width: 100%;" type="submit" class="btn"
+											(click)="addToCartSubmit(product?.id)">
+											<ng-container *ngIf="!isLoading else loading">
+												<i class="lni lni-cart"></i> Add to Cart
+											</ng-container>
+											<ng-template #loading>
+												<i class="lni lni-cart"></i> Loading...
+											</ng-template>
+										</button>
 									</div>
 								</div>
 								<!-- <div class="col-lg-4 col-md-4 col-12">
@@ -112,11 +116,11 @@
 										<button class="btn"><i class="lni lni-reload"></i> Compare</button>
 									</div>
 								</div> -->
-								<div class="col-lg-4 col-md-4 col-12">
+								<!-- <div class="col-lg-4 col-md-4 col-12">
 									<div class="wish-button">
 										<button class="btn"><i class="lni lni-heart"></i> To Wishlist</button>
 									</div>
-								</div>
+								</div> -->
 							</div>
 						</div>
 					</div>

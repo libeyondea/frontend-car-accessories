@@ -2,17 +2,17 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map } from 'rxjs/operators';
 
-import * as authActions from './auth.actions';
+import * as cartActions from './cart.actions';
 
 @Injectable()
-export class AuthEffects {
+export class CartEffects {
 	constructor(private actions$: Actions) {}
 
-	currentAuth$ = createEffect(() =>
+	currentCart$ = createEffect(() =>
 		this.actions$.pipe(
-			ofType(authActions.currentAuthRequested),
+			ofType(cartActions.currentCartRequested),
 			map((action) =>
-				authActions.currentAuthSucceed(action.payload.current)
+				cartActions.currentCartSucceed(action.payload.current)
 			)
 		)
 	);

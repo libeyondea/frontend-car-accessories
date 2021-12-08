@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { finalize } from 'rxjs';
 import { Product } from '~app/shared/models/product';
+import { CartService } from '~app/shared/services/cart.service';
 import { ProductService } from '~app/shared/services/product.service';
+import { AppState } from '~app/shared/store';
+import { currentCartRequested } from '~app/shared/store/cart/cart.actions';
 
 @Component({
 	selector: 'app-product',
@@ -11,11 +16,21 @@ import { ProductService } from '~app/shared/services/product.service';
 export class ProductComponent implements OnInit {
 	name: string | undefined;
 	product: Product | undefined;
+	isLoading: boolean = false;
+
+	listQuantity: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+	quantity: number = this.listQuantity[0];
 
 	constructor(
+		private store: Store<AppState>,
 		private route: ActivatedRoute,
-		private productService: ProductService
+		private productService: ProductService,
+		private cartService: CartService
 	) {}
+
+	onChangeQuantity(event: any) {
+		this.quantity = event.target.value;
+	}
 
 	ngOnInit(): void {
 		const slug = this.route.snapshot.paramMap.get('slug');
@@ -55,5 +70,19 @@ export class ProductComponent implements OnInit {
 			}
 			obj.target.style.opacity = 0.6;
 		}
+	}
+
+	addToCartSubmit(productId: number = 0): void {
+		const payload = {
+			product_id: productId,
+			quantity: Number(this.quantity),
+		};
+		this.isLoading = true;
+		this.cartService
+			.addToCart(payload)
+			.pipe(finalize(() => (this.isLoading = false)))
+			.subscribe((cart) => {
+				this.store.dispatch(currentCartRequested(cart.data));
+			});
 	}
 }

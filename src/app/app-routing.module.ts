@@ -19,6 +19,7 @@ const routes: Routes = [
 		path: 'cart',
 		loadChildren: () =>
 			import('./modules/cart/cart.module').then((m) => m.CartModule),
+		canActivate: [AuthGuard],
 	},
 	{
 		path: 'checkout',
@@ -55,6 +56,7 @@ const routes: Routes = [
 			import('./modules/account/account.module').then(
 				(m) => m.AccountModule
 			),
+		canActivate: [AuthGuard],
 	},
 	{ path: '**', redirectTo: '/' },
 ];

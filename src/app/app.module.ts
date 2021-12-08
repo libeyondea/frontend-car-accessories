@@ -19,6 +19,7 @@ import { HeaderComponent } from './shared/layouts/header/header.component';
 import { FooterComponent } from './shared/layouts/footer/footer.component';
 import { ProductService } from './shared/services/product.service';
 import { CategoryService } from './shared/services/category.service';
+import { CartService } from './shared/services/cart.service';
 
 @NgModule({
 	declarations: [AppComponent, HeaderComponent, FooterComponent],
@@ -39,6 +40,7 @@ import { CategoryService } from './shared/services/category.service';
 		CookieService,
 		ProductService,
 		CategoryService,
+		CartService,
 		AuthGuard,
 		{
 			provide: HTTP_INTERCEPTORS,

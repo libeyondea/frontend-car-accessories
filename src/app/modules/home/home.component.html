@@ -19,7 +19,15 @@
 							<span class="sale-tag">-{{ product?.discount }}%</span>
 						</ng-container>
 						<div class="button">
-							<a href="" class="btn"><i class="lni lni-cart"></i> Add to Cart</a>
+							<button [disabled]="isLoading" type="submit" class="btn"
+								(click)="addToCartSubmit(product?.id, 1)">
+								<ng-container *ngIf="!isLoading else loading">
+									<i class="lni lni-cart"></i> Add to Cart
+								</ng-container>
+								<ng-template #loading>
+									<i class="lni lni-cart"></i> Loading...
+								</ng-template>
+							</button>
 						</div>
 					</div>
 					<div class="product-info">
@@ -36,11 +44,12 @@
 						</ul>
 						<div class="price">
 							<ng-container *ngIf="product?.discount === 0 else discountYes">
-								<span>{{ product?.price }}đ</span>
+								<span>{{ product?.price | currency:'VND': 'symbol' }}</span>
 							</ng-container>
 							<ng-template #discountYes>
-								<span>{{ discountTotal(product.price, product.discount) }}đ</span>
-								<span class="discount-price">{{ product?.price }}đ</span>
+								<span>{{ discountTotal(product.price, product.discount) | currency:'VND': 'symbol'
+									}}</span>
+								<span class="discount-price">{{ product?.price | currency:'VND': 'symbol' }}</span>
 							</ng-template>
 						</div>
 					</div>
@@ -65,7 +74,8 @@
 								<span class="sale-tag">-{{ product?.discount }}%</span>
 							</ng-container>
 							<div class="button">
-								<a href="" class="btn"><i class="lni lni-cart"></i> Add to Cart</a>
+								<button type="button" class="btn" (click)="addToCartSubmit(product?.id, 1)"><i
+										class="lni lni-cart"></i> Add to Cart</button>
 							</div>
 						</div>
 						<div class="product-info">
@@ -82,11 +92,12 @@
 							</ul>
 							<div class="price">
 								<ng-container *ngIf="product?.discount === 0 else discountYes">
-									<span>{{ product?.price }}đ</span>
+									<span>{{ product?.price | currency:'VND': 'symbol' }}</span>
 								</ng-container>
 								<ng-template #discountYes>
-									<span>{{ discountTotal(product.price, product.discount) }}đ</span>
-									<span class="discount-price">{{ product?.price }}đ</span>
+									<span>{{ discountTotal(product.price, product.discount) | currency:'VND': 'symbol'
+										}}</span>
+									<span class="discount-price">{{ product?.price | currency:'VND': 'symbol' }}</span>
 								</ng-template>
 							</div>
 						</div>
