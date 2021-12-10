@@ -78,11 +78,18 @@ export class ProductComponent implements OnInit {
 			quantity: Number(this.quantity),
 		};
 		this.isLoading = true;
-		this.cartService
-			.addToCart(payload)
-			.pipe(finalize(() => (this.isLoading = false)))
-			.subscribe((cart) => {
-				this.store.dispatch(currentCartRequested(cart.data));
-			});
+		this.cartService.addToCart(payload).subscribe((cart) => {
+			console.log(cart);
+			this.cartService
+				.listCarts()
+				.pipe(finalize(() => (this.isLoading = false)))
+				.subscribe((carts: any) => {
+					if (carts.success) {
+						this.store.dispatch(
+							currentCartRequested(carts.data.cartproducts)
+						);
+					}
+				});
+		});
 	}
 }

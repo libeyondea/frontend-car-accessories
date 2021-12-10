@@ -74,8 +74,15 @@
 								<span class="sale-tag">-{{ product?.discount }}%</span>
 							</ng-container>
 							<div class="button">
-								<button type="button" class="btn" (click)="addToCartSubmit(product?.id, 1)"><i
-										class="lni lni-cart"></i> Add to Cart</button>
+								<button [disabled]="isLoading" type="submit" class="btn"
+									(click)="addToCartSubmit(product?.id, 1)">
+									<ng-container *ngIf="!isLoading else loading">
+										<i class="lni lni-cart"></i> Add to Cart
+									</ng-container>
+									<ng-template #loading>
+										<i class="lni lni-cart"></i> Loading...
+									</ng-template>
+								</button>
 							</div>
 						</div>
 						<div class="product-info">

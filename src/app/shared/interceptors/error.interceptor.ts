@@ -9,10 +9,11 @@ import {
 import { catchError, Observable, throwError } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from '~env/environment';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-	constructor(private cookieService: CookieService) {}
+	constructor(private cookieService: CookieService, private router: Router) {}
 
 	intercept(
 		request: HttpRequest<unknown>,
@@ -27,6 +28,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 					console.error('An error occurred:', error.error);
 				} else if (error.status === 401) {
 					this.cookieService.delete('access_token');
+					this.router.navigate(['/signin']);
 				} else {
 					console.error(
 						`Backend returned code ${error.status}, body was: `,

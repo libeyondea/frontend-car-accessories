@@ -9,6 +9,8 @@ import { Store } from '@ngrx/store';
 import { AppState } from '~app/shared/store';
 import { finalize } from 'rxjs';
 import { currentCartRequested } from '~app/shared/store/cart/cart.actions';
+import { BrandService } from '~app/shared/services/brand.service';
+import { Brand } from '~app/shared/models/brand';
 
 @Component({
 	selector: 'app-product-list-cate',
@@ -18,6 +20,7 @@ import { currentCartRequested } from '~app/shared/store/cart/cart.actions';
 export class ProductListCateComponent implements OnInit {
 	products: Product[] = [];
 	categories: Category[] = [];
+	brands: Brand[] = [];
 	isLoading: boolean = false;
 
 	constructor(
@@ -26,7 +29,8 @@ export class ProductListCateComponent implements OnInit {
 		private categoryService: CategoryService,
 		private route: ActivatedRoute,
 		private router: Router,
-		private cartService: CartService
+		private cartService: CartService,
+		private brandService: BrandService
 	) {
 		this.router.routeReuseStrategy.shouldReuseRoute = () => false;
 	}
@@ -55,6 +59,11 @@ export class ProductListCateComponent implements OnInit {
 				this.categories = categories.data;
 			}
 		});
+		this.brandService.listBrands().subscribe((brands: any) => {
+			if (brands.success) {
+				this.brands = brands.data;
+			}
+		});
 		this.productService
 			.listProducts(
 				undefined,
@@ -78,11 +87,17 @@ export class ProductListCateComponent implements OnInit {
 			quantity: quantity,
 		};
 		this.isLoading = true;
-		this.cartService
-			.addToCart(payload)
-			.pipe(finalize(() => (this.isLoading = false)))
-			.subscribe((cart) => {
-				this.store.dispatch(currentCartRequested(cart.data));
-			});
+		this.cartService.addToCart(payload).subscribe((cart) => {
+			this.cartService
+				.listCarts()
+				.pipe(finalize(() => (this.isLoading = false)))
+				.subscribe((carts: any) => {
+					if (carts.success) {
+						this.store.dispatch(
+							currentCartRequested(carts.data.cartproducts)
+						);
+					}
+				});
+		});
 	}
 }

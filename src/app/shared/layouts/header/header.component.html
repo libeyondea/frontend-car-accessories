@@ -131,58 +131,64 @@
 								</a>
 								<!-- Shopping Item -->
 								<div class="shopping-item">
-									<div class="dropdown-cart-header">
-										<span>{{ totalItemCart() }}
-											Items</span>
-										<a href="cart.html">View Cart</a>
-									</div>
-									<ul class="shopping-list">
-
-										<li *ngFor="let cart of carts">
-											<a href="javascript:void(0)" class="remove" title="Remove this item"><i
-													class="lni lni-close"></i></a>
-											<div class="cart-img-head">
-												<a class="cart-img" href="product-details.html"><img
-														src="assets/images/header/cart-items/item1.jpg" alt="#"></a>
-											</div>
-
-											<div class="content">
-												<h4><a href="product-details.html">
-														{{ cart.product.name }}</a></h4>
-												<p class="quantity">
-													<span class="text-dark">{{ cart.quantity }}</span>
-													x
-													<ng-container *ngIf="cart.product.discount === 0 else discountYes">
-														<span class="amount text-dark">{{ cart.product.price |
-															currency:'VND':
-															'symbol'
-															}}</span>
-													</ng-container>
-													<ng-template #discountYes>
-														<span style="text-decoration: line-through;">{{
-															cart.product.price | currency:'VND': 'symbol'
-															}}</span>
-														<span class="amount text-dark">
-															{{ discountTotal(cart.product?.price,
-															cart.product?.discount) | currency:'VND': 'symbol' }}
-														</span>
-													</ng-template>
-
-												</p>
-											</div>
-										</li>
-
-									</ul>
-									<div class="bottom">
-										<div class="total">
-											<span>Total</span>
-											<span class="total-amount">{{totalPrice() | currency: 'VND': 'symbol'
-												}}</span>
+									<ng-container *ngIf="!carts || carts.length < 1 else notEmpty">
+										<h5 class="text-center">Your cart is empty</h5>
+									</ng-container>
+									<ng-template #notEmpty>
+										<div class="dropdown-cart-header">
+											<span>{{ totalItemCart() }}
+												Items</span>
+											<a [routerLink]="['/cart']">View Cart</a>
 										</div>
-										<div class="button">
-											<a href="checkout.html" class="btn animate">Checkout</a>
+										<ul class="shopping-list">
+											<li *ngFor="let cart of carts">
+												<a href="javascript:void(0)" class="remove" title="Remove this item"><i
+														class="lni lni-close"></i></a>
+												<div class="cart-img-head">
+													<a class="cart-img"
+														[routerLink]="['/product', cart.product?.slug]"><img
+															src="{{ singleImage(cart.product?.productimages) }}"
+															alt="#"></a>
+												</div>
+
+												<div class="content">
+													<h4><a [routerLink]="['/product', cart.product?.slug]">
+															{{ cart.product.name }}</a></h4>
+													<p class="quantity">
+														<span class="text-dark">{{ cart.quantity }}</span>
+														x
+														<ng-container
+															*ngIf="cart.product.discount === 0 else discountYes">
+															<span class="amount text-dark">{{ cart.product.price |
+																currency:'VND':
+																'symbol'
+																}}</span>
+														</ng-container>
+														<ng-template #discountYes>
+															<span style="text-decoration: line-through;">{{
+																cart.product.price | currency:'VND': 'symbol'
+																}}</span>
+															<span class="amount text-dark">
+																{{ discountTotal(cart.product?.price,
+																cart.product?.discount) | currency:'VND': 'symbol' }}
+															</span>
+														</ng-template>
+
+													</p>
+												</div>
+											</li>
+										</ul>
+										<div class="bottom">
+											<div class="total">
+												<span>Total</span>
+												<span class="total-amount">{{totalPrice() | currency: 'VND': 'symbol'
+													}}</span>
+											</div>
+											<div class="button">
+												<a [routerLink]="['/checkout']" class="btn animate">Checkout</a>
+											</div>
 										</div>
-									</div>
+									</ng-template>
 								</div>
 								<!--/ End Shopping Item -->
 							</div>

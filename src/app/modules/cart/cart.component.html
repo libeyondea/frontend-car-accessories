@@ -17,179 +17,113 @@
 	</div>
 </div>
 
-
 <div class="shopping-cart section">
 	<div class="container">
-		<div class="cart-list-head">
-
-			<div class="cart-list-title">
-				<div class="row">
-					<div class="col-lg-1 col-md-1 col-12">
-					</div>
-					<div class="col-lg-4 col-md-3 col-12">
-						<p>Product Name</p>
-					</div>
-					<div class="col-lg-2 col-md-2 col-12">
-						<p>Quantity</p>
-					</div>
-					<div class="col-lg-2 col-md-2 col-12">
-						<p>Subtotal</p>
-					</div>
-					<div class="col-lg-2 col-md-2 col-12">
-						<p>Discount</p>
-					</div>
-					<div class="col-lg-1 col-md-2 col-12">
-						<p>Remove</p>
-					</div>
-				</div>
-			</div>
-
-
-			<div class="cart-single-list">
-				<div class="row align-items-center">
-					<div class="col-lg-1 col-md-1 col-12">
-						<a href="product-details.html"><img src="assets/images/cart/01.jpg" alt="#"></a>
-					</div>
-					<div class="col-lg-4 col-md-3 col-12">
-						<h5 class="product-name"><a href="product-details.html">
-								Canon EOS M50 Mirrorless Camera</a></h5>
-						<p class="product-des">
-							<span><em>Type:</em> Mirrorless</span>
-							<span><em>Color:</em> Black</span>
-						</p>
-					</div>
-					<div class="col-lg-2 col-md-2 col-12">
-						<div class="count-input">
-							<select class="form-control">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-2 col-12">
-						<p>$910.00</p>
-					</div>
-					<div class="col-lg-2 col-md-2 col-12">
-						<p>$29.00</p>
-					</div>
-					<div class="col-lg-1 col-md-2 col-12">
-						<a class="remove-item" href="javascript:void(0)"><i class="lni lni-close"></i></a>
-					</div>
-				</div>
-			</div>
-
-
-			<div class="cart-single-list">
-				<div class="row align-items-center">
-					<div class="col-lg-1 col-md-1 col-12">
-						<a href="product-details.html"><img src="assets/images/cart/02.jpg" alt="#"></a>
-					</div>
-					<div class="col-lg-4 col-md-3 col-12">
-						<h5 class="product-name"><a href="product-details.html">
-								Apple iPhone X 256 GB Space Gray</a></h5>
-						<p class="product-des">
-							<span><em>Memory:</em> 256 GB</span>
-							<span><em>Color:</em> Space Gray</span>
-						</p>
-					</div>
-					<div class="col-lg-2 col-md-2 col-12">
-						<div class="count-input">
-							<select class="form-control">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-2 col-12">
-						<p>$1100.00</p>
-					</div>
-					<div class="col-lg-2 col-md-2 col-12">
-						<p>—</p>
-					</div>
-					<div class="col-lg-1 col-md-2 col-12">
-						<a class="remove-item" href="javascript:void(0)"><i class="lni lni-close"></i></a>
-					</div>
-				</div>
-			</div>
-
-
-			<div class="cart-single-list">
-				<div class="row align-items-center">
-					<div class="col-lg-1 col-md-1 col-12">
-						<a href="product-details.html"><img src="assets/images/cart/03.jpg" alt="#"></a>
-					</div>
-					<div class="col-lg-4 col-md-3 col-12">
-						<h5 class="product-name"><a href="product-details.html">HP LaserJet Pro Laser Printer</a></h5>
-						<p class="product-des">
-							<span><em>Type:</em> Laser</span>
-							<span><em>Color:</em> White</span>
-						</p>
-					</div>
-					<div class="col-lg-2 col-md-2 col-12">
-						<div class="count-input">
-							<select class="form-control">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-2 col-12">
-						<p>$550.00</p>
-					</div>
-					<div class="col-lg-2 col-md-2 col-12">
-						<p>—</p>
-					</div>
-					<div class="col-lg-1 col-md-2 col-12">
-						<a class="remove-item" href="javascript:void(0)"><i class="lni lni-close"></i></a>
-					</div>
-				</div>
-			</div>
-
-		</div>
-		<div class="row">
-			<div class="col-12">
-
-				<div class="total-amount">
+		<ng-container *ngIf="!carts || carts.length < 1 else notEmpty">
+			<div class="cart-list-head">
+				<div class="cart-list-title">
 					<div class="row">
-						<div class="col-lg-8 col-md-6 col-12">
-							<div class="left">
-								<div class="coupon">
-									<form action="#" target="_blank">
-										<input name="Coupon" placeholder="Enter Your Coupon">
-										<div class="button">
-											<button class="btn">Apply Coupon</button>
-										</div>
-									</form>
-								</div>
-							</div>
+						<div class="col-12">
+							<h3 class="text-center">Your cart is empty</h3>
 						</div>
-						<div class="col-lg-4 col-md-6 col-12">
-							<div class="right">
-								<ul>
-									<li>Cart Subtotal<span>$2560.00</span></li>
-									<li>Shipping<span>Free</span></li>
-									<li>You Save<span>$29.00</span></li>
-									<li class="last">You Pay<span>$2531.00</span></li>
-								</ul>
-								<div class="button">
-									<a href="checkout.html" class="btn">Checkout</a>
-									<a href="product-grids.html" class="btn btn-alt">Continue shopping</a>
-								</div>
-							</div>
+					</div>
+				</div>
+			</div>
+		</ng-container>
+		<ng-template #notEmpty>
+			<div class="cart-list-head">
+				<div class="cart-list-title">
+					<div class="row">
+						<div class="col-lg-1 col-md-1 col-12">
+						</div>
+						<div class="col-lg-4 col-md-3 col-12">
+							<p>Product Name</p>
+						</div>
+						<div class="col-lg-2 col-md-2 col-12">
+							<p>Quantity</p>
+						</div>
+						<div class="col-lg-2 col-md-2 col-12">
+							<p>Subtotal</p>
+						</div>
+						<div class="col-lg-2 col-md-2 col-12">
+							<p>Discount</p>
+						</div>
+						<div class="col-lg-1 col-md-2 col-12">
+							<p>Remove</p>
 						</div>
 					</div>
 				</div>
 
+				<div class="cart-single-list" *ngFor="let cart of carts">
+					<div class="row align-items-center">
+						<div class="col-lg-1 col-md-1 col-12">
+							<a [routerLink]="['/product', cart.product?.slug]"><img
+									src="{{ singleImage(cart.product?.productimages) }}" alt="#"></a>
+						</div>
+						<div class="col-lg-4 col-md-3 col-12">
+							<h5 class="product-name"><a [routerLink]="['/product', cart.product?.slug]">
+									{{ cart.product.name }}</a></h5>
+							<p class="product-des">
+								<span><em>Category:</em> {{ cart.product.category.name }}</span>
+								<span><em>Brand:</em> {{ cart.product.brand.name }}</span>
+							</p>
+						</div>
+						<div class="col-lg-2 col-md-2 col-12">
+							<div class="count-input">
+								{{ cart.quantity }}
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-2 col-12">
+							<p>{{ priceQtyTotal(cart.product.price, cart.quantity) | currency:'VND': 'symbol' }}</p>
+						</div>
+						<div class="col-lg-2 col-md-2 col-12">
+							<p>{{ discountPriceQtyTotal(cart.product.price, cart.product.discount, cart.quantity) |
+								currency:'VND': 'symbol' }}</p>
+						</div>
+						<div class="col-lg-1 col-md-2 col-12">
+							<ng-container *ngIf="!isLoading else loading">
+								<a class="remove-item" href="javascript:void(0)"
+									(click)="delCartItemSubmit(cart.product?.id)">
+									<i class="lni lni-close"></i></a>
+							</ng-container>
+							<ng-template #loading>
+								Deleting...
+							</ng-template>
+						</div>
+					</div>
+				</div>
 			</div>
-		</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="total-amount">
+						<div class="row">
+							<div class="col-lg-8 col-md-6 col-12">
+							</div>
+							<div class="col-lg-4 col-md-6 col-12">
+								<div class="right">
+									<ul>
+										<li>Subtotal Price<span>{{ totalPriceSubAll() | currency:'VND': 'symbol'
+												}}</span>
+										</li>
+										<li>Shipping<span>Free</span></li>
+										<li>Subtotal Discount<span>{{ totalPriceDisSubAll() | currency:'VND': 'symbol'
+												}}</span>
+										</li>
+										<li class="last">Total Price<span>{{ totalPriceAll() | currency:'VND': 'symbol'
+												}}</span>
+										</li>
+									</ul>
+									<div class="button">
+										<a [routerLink]="['/checkout']" class="btn">Checkout</a>
+										<a [routerLink]="['/']" class="btn btn-alt">Continue shopping</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</ng-template>
 	</div>
 </div>

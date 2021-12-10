@@ -53,7 +53,7 @@ export class SigninComponent implements OnInit {
 					'access_token',
 					user.data.tokens.access_token.token
 				);
-				this.router.navigateByUrl('/');
+				window.location.href = '/';
 			});
 	}
 }

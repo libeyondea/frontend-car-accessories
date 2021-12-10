@@ -45,16 +45,24 @@ export class HeaderComponent implements OnInit {
 				this.categories = categories.data;
 			}
 		});
-		this.cartService.listCarts().subscribe((carts: any) => {
-			if (carts.success) {
-				this.store.dispatch(
-					currentCartRequested(carts.data.cartproducts)
-				);
-			}
-		});
 		this.currentAuth.subscribe((auth) => {
 			console.log('auth', auth);
 			this.current = auth;
+		});
+		this.currentAuth.subscribe((auth) => {
+			if (auth) {
+				this.cartService.listCarts().subscribe((carts: any) => {
+					if (
+						carts.success &&
+						carts.data?.cartproducts &&
+						carts.data.cartproducts.length > 0
+					) {
+						this.store.dispatch(
+							currentCartRequested(carts.data.cartproducts)
+						);
+					}
+				});
+			}
 		});
 		this.currentCart.subscribe((carts) => {
 			console.log('carts', carts);
@@ -68,7 +76,7 @@ export class HeaderComponent implements OnInit {
 		});
 		this.store.dispatch(currentAuthRequested(null));
 		this.cookieService.delete('access_token');
-		this.router.navigateByUrl('/signin');
+		window.location.href = '/signin';
 	}
 
 	totalPrice() {
@@ -91,7 +99,19 @@ export class HeaderComponent implements OnInit {
 				return a + b['quantity'];
 			}, 0);
 		}
-		return;
+		return 0;
+	}
+
+	singleImage(
+		images?: Array<{
+			id?: number;
+			name?: string;
+			url?: string;
+			created_at?: string;
+			updated_at?: string;
+		}>
+	): string | undefined {
+		return images && images[0]?.url;
 	}
 
 	discountTotal(price: number = 0, discount: number = 0): number {

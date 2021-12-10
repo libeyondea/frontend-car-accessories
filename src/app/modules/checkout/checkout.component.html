@@ -1,1 +1,217 @@
-<p>checkout works!</p>
+<div class="breadcrumbs">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-lg-6 col-md-6 col-12">
+				<div class="breadcrumbs-content">
+					<h1 class="page-title">checkout</h1>
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-6 col-12">
+				<ul class="breadcrumb-nav">
+					<li><a href="index.html"><i class="lni lni-home"></i> Home</a></li>
+					<li><a href="index.html">Shop</a></li>
+					<li>checkout</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<section class="checkout-wrapper section">
+	<div class="container">
+		<ng-container *ngIf="!carts || carts.length < 1 else notEmpty">
+			<div class="row justify-content-center">
+				<div class="col-lg-4">
+					<div class="checkout-sidebar">
+						<div class="checkout-sidebar-price-table text-center">
+							<h3 class="text-center">Checkout is empty</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+		</ng-container>
+		<ng-template #notEmpty>
+			<form (ngSubmit)="onSubmit()" #checkoutForm="ngForm">
+				<div class="row justify-content-center">
+					<ng-container *ngIf="checkoutSuccess else checkoutSuccessNo">
+						<div class="col-lg-4">
+							<div class="checkout-sidebar">
+								<div class="checkout-sidebar-price-table text-center">
+									<h3 class="text-center mb-3">Checkout Success!</h3>
+									<a [routerLink]="['/']" class="text-center">Back Home</a>
+								</div>
+							</div>
+						</div>
+					</ng-container>
+					<ng-template #checkoutSuccessNo>
+						<div class="col-lg-8">
+							<div class="checkout-steps-form-style-1">
+								<ul id="accordionExample">
+									<li>
+										<h6 class="title" data-bs-toggle="collapse" data-bs-target="#collapseFour"
+											aria-expanded="true" aria-controls="collapseFour">Shipping Address</h6>
+										<section class="checkout-steps-form-content collapse show" id="collapseFour"
+											aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+											<div class="row">
+												<div class="col-md-6">
+													<div class="single-form form-default">
+														<label>First Name</label>
+														<div class="form-input form">
+															<input type="text" placeholder="First Name" type="text"
+																id="first_name" name="first_name" #first_name="ngModel"
+																[(ngModel)]="checkout.first_name" required>
+															<ng-container
+																*ngIf="first_name.invalid && (first_name.dirty || first_name.touched)">
+																<div *ngIf="first_name.errors?.['required']"
+																	class="invalid-feedback d-block">
+																	First name is required.
+																</div>
+															</ng-container>
+															<ng-container *ngIf="errMsg.first_name">
+																<div class="invalid-feedback d-block">
+																	{{ errMsg.first_name }}
+																</div>
+															</ng-container>
+														</div>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="single-form form-default">
+														<label>Last Name</label>
+														<div class="form-input form">
+															<input type="text" placeholder="Last Name" id="last_name"
+																name="last_name" #last_name="ngModel"
+																[(ngModel)]="checkout.last_name" required>
+															<ng-container
+																*ngIf="last_name.invalid && (last_name.dirty || last_name.touched)">
+																<div *ngIf="last_name.errors?.['required']"
+																	class="invalid-feedback d-block">
+																	Last name is required.
+																</div>
+															</ng-container>
+															<ng-container *ngIf="errMsg.last_name">
+																<div class="invalid-feedback d-block">
+																	{{ errMsg.last_name }}
+																</div>
+															</ng-container>
+														</div>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="single-form form-default">
+														<label>Email</label>
+														<div class="form-input form">
+															<input type="text" placeholder="Email" id="email"
+																name="email" #email="ngModel"
+																[(ngModel)]="checkout.email" required>
+															<ng-container
+																*ngIf="email.invalid && (email.dirty || email.touched)">
+																<div *ngIf="email.errors?.['required']"
+																	class="invalid-feedback d-block">
+																	Email is required.
+																</div>
+															</ng-container>
+															<ng-container *ngIf="errMsg.email">
+																<div class="invalid-feedback d-block">
+																	{{ errMsg.email }}
+																</div>
+															</ng-container>
+														</div>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="single-form form-default">
+														<label>Phone Number</label>
+														<div class="form-input form">
+															<input type="text" placeholder="Phone Number"
+																id="phone_number" name="phone_number"
+																#phone_number="ngModel"
+																[(ngModel)]="checkout.phone_number" required>
+															<ng-container
+																*ngIf="phone_number.invalid && (phone_number.dirty || phone_number.touched)">
+																<div *ngIf="phone_number.errors?.['required']"
+																	class="invalid-feedback d-block">
+																	Phone number is required.
+																</div>
+															</ng-container>
+															<ng-container *ngIf="errMsg.phone_number">
+																<div class="invalid-feedback d-block">
+																	{{ errMsg.phone_number }}
+																</div>
+															</ng-container>
+														</div>
+													</div>
+												</div>
+												<div class="col-md-12">
+													<div class="single-form form-default">
+														<label>Address</label>
+														<div class="form-input form">
+															<input type="text" placeholder="Address" id="address"
+																name="address" #address="ngModel"
+																[(ngModel)]="checkout.address" required>
+															<ng-container
+																*ngIf="address.invalid && (address.dirty || address.touched)">
+																<div *ngIf="address.errors?.['required']"
+																	class="invalid-feedback d-block">
+																	Address is required.
+																</div>
+															</ng-container>
+															<ng-container *ngIf="errMsg.address">
+																<div class="invalid-feedback d-block">
+																	{{ errMsg.address }}
+																</div>
+															</ng-container>
+														</div>
+													</div>
+												</div>
+											</div>
+										</section>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<div class="checkout-sidebar">
+								<div class="checkout-sidebar-price-table mt-4 mt-lg-0">
+									<h5 class="title">Pricing Table</h5>
+									<div class="sub-total-price">
+										<div class="total-price">
+											<p class="value">Subtotal Price:</p>
+											<p class="price">{{ totalPriceSubAll() | currency:'VND': 'symbol'
+												}}</p>
+										</div>
+										<div class="total-price shipping">
+											<p class="value">Shipping:</p>
+											<p class="price">Free</p>
+										</div>
+										<div class="total-price discount">
+											<p class="value">Subtotal Discount:</p>
+											<p class="price">{{ totalPriceDisSubAll() | currency:'VND': 'symbol' }}</p>
+										</div>
+									</div>
+									<div class="total-payable">
+										<div class="payable-price">
+											<p class="value">Total Price:</p>
+											<p class="price">{{ totalPriceAll() | currency:'VND': 'symbol'
+												}}</p>
+										</div>
+									</div>
+									<div class="price-table-btn button">
+										<button [disabled]="isLoading" type="submit" class="btn btn-alt">
+											<ng-container *ngIf="!isLoading else loading">
+												Checkout
+											</ng-container>
+											<ng-template #loading>
+												Loading Checkout...
+											</ng-template>
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</ng-template>
+				</div>
+			</form>
+		</ng-template>
+	</div>
+</section>
