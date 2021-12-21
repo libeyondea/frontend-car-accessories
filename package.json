@@ -21,8 +21,10 @@
 		"@ngrx/effects": "^13.0.1",
 		"@ngrx/store": "^13.0.1",
 		"@ngrx/store-devtools": "^13.0.1",
+		"@sweetalert2/ngx-sweetalert2": "^10.0.0",
 		"ngx-cookie-service": "^13.0.1",
 		"rxjs": "~7.4.0",
+		"sweetalert2": "^11.3.0",
 		"tslib": "^2.3.0",
 		"zone.js": "~0.11.4"
 	},

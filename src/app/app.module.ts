@@ -20,6 +20,7 @@ import { FooterComponent } from './shared/layouts/footer/footer.component';
 import { ProductService } from './shared/services/product.service';
 import { CategoryService } from './shared/services/category.service';
 import { CartService } from './shared/services/cart.service';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
 	declarations: [AppComponent, HeaderComponent, FooterComponent],
@@ -34,6 +35,7 @@ import { CartService } from './shared/services/cart.service';
 			maxAge: 25,
 			logOnly: environment.production,
 		}),
+		SweetAlert2Module.forRoot(),
 	],
 	providers: [
 		AuthService,
